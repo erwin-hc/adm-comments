@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAINEL DE CONTROLE</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h3 style = "text-transform:uppercase;">lista de usuários</h3>
+    </header>
+    <!-- USUARIOS -->
+    <div class="table-wrapper">
+      <table style="overflow-x:auto;" class="table-users">
+        <tr>
+          <th style = "text-transform:capitalize;">nome</th>
+          <th style = "text-transform:capitalize;">telefone</th>
+          <th style = "text-transform:capitalize;">Email</th>
+          <th></th>
+        </tr>
+      </table>
+      <button class="btn btn-add">Novo</button>
+    </div>
+    <!-- Add Modal -->
+    <div class="add-modal modal-wrapper">
+      <div class="modal">
+        <div class="modal-header"><h3 style = "text-transform:uppercase;">Novo usuário</h3></div>
+        <div class="modal-body">
+          <form class="form" autocomplete="off">
+            <input id="txtNome" style = "text-transform:uppercase;" type="text" name="firstName" placeholder="Nome">
+              <input style = "text-transform:uppercase;" type="text" name="phone" placeholder="Telefone">
+            <input style = "text-transform:lowercase;" type="email" name="email" placeholder="Email">
+            <button class="btn btn-modal">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+      
+    <!-- Edit Modal -->
+    <div class="edit-modal modal-wrapper">
+      <div class="modal">
+        <div class="modal-header"><h3 style = "text-transform:uppercase;">Editar Usuário</h3></div>
+        <div class="modal-body">
+          <form class="form" autocomplete="off">
+            <input style = "text-transform:uppercase;" type="text" name="firstName" placeholder="Nome">
+            <input style = "text-transform:uppercase;" type="text" name="phone" placeholder="Telefone" id="Telefone">
+            <input style = "text-transform:lowercase;" type="email" name="email" placeholder="Email">
+            <button class="btn btn-modal">Alterar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAN7lhI0o34cNGha7ne50I5q9Tx3EjFABI",
+      authDomain: "comments-ddee5.firebaseapp.com",
+      databaseURL: "https://comments-ddee5-default-rtdb.firebaseio.com",
+      projectId: "comments-ddee5",
+      storageBucket: "comments-ddee5.appspot.com",
+      messagingSenderId: "282421967272",
+      appId: "1:282421967272:web:86f0304456d45a07f9059d"
+
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  
+  </script>
+
+
+
+
+  <script src="./script.js"></script>
+</body>
+</html>

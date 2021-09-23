@@ -13,19 +13,33 @@ const tableUsers = document.querySelector('.table-users');
 
 let id;
 
-// Create element and render users
+var data = new Date();
+var dia     = data.getDate();           // 1-31
+var dia_sem = data.getDay();            // 0-6 (zero=domingo)
+var mes     = data.getMonth();          // 0-11 (zero=janeiro)
+var ano2    = data.getYear();           // 2 dígitos
+var ano4    = data.getFullYear();       // 4 dígitos
+var hora    = data.getHours();          // 0-23
+var min     = data.getMinutes();        // 0-59
+var seg     = data.getSeconds();        // 0-59
+var mseg    = data.getMilliseconds();   // 0-999
+var tz      = data.getTimezoneOffset(); // em minutos
+var str_data = dia + '/' + (mes+1) + '/' + ano4;
+var str_hora = hora + ':' + min + ':' + seg;
+var data_hora = str_data + ' - ' + str_hora;
+
+// Create element and render comments
 const renderUser = doc => {
-  const tr = `
-    <tr data-id='${doc.id}'>
-      <td style = "text-transform:uppercase;">${doc.data().firstName}</td>
-     
-      <td>${doc.data().phone}</td>
-      <td style = "text-transform:lowercase;">${doc.data().email}</td>
-      <td>
-        <button class="btn btn-edit">Editar</button>
-        <button class="btn btn-delete">Apagar</button>
-      </td>
-    </tr>
+  const tr = `    
+  <tr data-id='${doc.id}'>
+  <td style = "text-transform:uppercase;">${doc.data().nome}</td>     
+  <td style = "text-transform:uppercase;">${doc.data().horario}</td>
+  <td style = "text-transform:uppercase;">${doc.data().comentario}</td>
+  <td>
+    <button class="btn btn-edit">Editar</button>
+    <button class="btn btn-delete">Apagar</button>
+  </td>
+  </tr>
   `;
  
   tableUsers.insertAdjacentHTML('beforeend', tr);
@@ -36,16 +50,16 @@ const renderUser = doc => {
     editModal.classList.add('modal-show');
 
     id = doc.id;
-    editModalForm.firstName.value = doc.data().firstName;
-    editModalForm.phone.value = doc.data().phone;
-    editModalForm.email.value = doc.data().email;
+    editModalForm.nome.value = doc.data().nome;
+    editModalForm.horario.value = doc.data().horario;
+    editModalForm.comentario.value = doc.data().comentario;
 
   });
 
   // Click delete user
   const btnDelete = document.querySelector(`[data-id='${doc.id}'] .btn-delete`);
   btnDelete.addEventListener('click', () => {
-    db.collection('users').doc(`${doc.id}`).delete().then(() => {
+    db.collection('comments').doc(`${doc.id}`).delete().then(() => {
       console.log('Document succesfully deleted!');
     }).catch(err => {
       console.log('Error removing document', err);
@@ -58,10 +72,10 @@ const renderUser = doc => {
 btnAdd.addEventListener('click', () => {
   addModal.classList.add('modal-show');
 
-  addModalForm.firstName.value = '';
-  addModalForm.phone.value = '';
-  addModalForm.email.value = '';
-});
+  addModalForm.nome.value = '';
+  addModalForm.horario.value = data_hora;
+  addModalForm.comentario.value.replace(/\r?\n/g, "<br />") = '';
+  });
 
 // User click anyware outside the modal
 window.addEventListener('click', e => {
@@ -73,15 +87,15 @@ window.addEventListener('click', e => {
   }
 });
 
-// Get all users
-// db.collection('users').get().then(querySnapshot => {
+// Get all comments
+// db.collection('comments').get().then(querySnapshot => {
 //   querySnapshot.forEach(doc => {
 //     renderUser(doc);
 //   })
 // });
 
 // Real time listener
-db.collection('users').onSnapshot(snapshot => {
+db.collection('comments').onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
     if(change.type === 'added') {
       renderUser(change.doc);
@@ -103,10 +117,10 @@ db.collection('users').onSnapshot(snapshot => {
 // Click submit in add modal
 addModalForm.addEventListener('submit', e => {
   e.preventDefault();
-  db.collection('users').add({
-    firstName: addModalForm.firstName.value,
-    phone: addModalForm.phone.value,
-    email: addModalForm.email.value,
+  db.collection('comments').add({
+    nome: addModalForm.nome.value,
+    horario: addModalForm.horario.value,
+    comentario: addModalForm.comentario.value,
   });
   modalWrapper.classList.remove('modal-show');
 });
@@ -114,10 +128,10 @@ addModalForm.addEventListener('submit', e => {
 // Click submit in edit modal
 editModalForm.addEventListener('submit', e => {
   e.preventDefault();
-  db.collection('users').doc(id).update({
-    firstName: editModalForm.firstName.value,
-    phone: editModalForm.phone.value,
-    email: editModalForm.email.value,
+  db.collection('comments').doc(id).update({
+    nome: editModalForm.nome.value,
+    horario: editModalForm.horario.value,
+    comentario: editModalForm.comentario.value,
   });
   editModal.classList.remove('modal-show');
   

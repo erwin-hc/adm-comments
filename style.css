@@ -127,6 +127,12 @@ header h3 {
   animation-name: animatetop;
   animation-duration: .4s;
 }
+textarea {
+  resize: vertical;
+  width: 100%;
+  min-height: 100px;
+  margin-bottom: 1rem;
+}
 
 @keyframes animatetop {
   from {

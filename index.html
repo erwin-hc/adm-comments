@@ -9,15 +9,15 @@
 <body>
   <div class="container">
     <header>
-      <h3 style = "text-transform:uppercase;">lista de usuários</h3>
+      <h3 style = "text-transform:uppercase;">lista de comentários</h3>
     </header>
     <!-- USUARIOS -->
     <div class="table-wrapper">
       <table style="overflow-x:auto;" class="table-users">
         <tr>
           <th style = "text-transform:capitalize;">nome</th>
-          <th style = "text-transform:capitalize;">telefone</th>
-          <th style = "text-transform:capitalize;">Email</th>
+          <th style = "text-transform:capitalize;">horario</th>
+          <th style = "text-transform:capitalize;">comentario</th>
           <th></th>
         </tr>
       </table>
@@ -26,12 +26,12 @@
     <!-- Add Modal -->
     <div class="add-modal modal-wrapper">
       <div class="modal">
-        <div class="modal-header"><h3 style = "text-transform:uppercase;">Novo usuário</h3></div>
+        <div class="modal-header"><h3 style = "text-transform:uppercase;">Novo Comentário</h3></div>
         <div class="modal-body">
           <form class="form" autocomplete="off">
-            <input id="txtNome" style = "text-transform:uppercase;" type="text" name="firstName" placeholder="Nome">
-              <input style = "text-transform:uppercase;" type="text" name="phone" placeholder="Telefone">
-            <input style = "text-transform:lowercase;" type="email" name="email" placeholder="Email">
+            <input                                        type="text" name="horario"    id="currentDate" readonly>
+            <input    style = "text-transform:uppercase;" type="text" name="nome"       placeholder="Incluir Nome" required>            
+             <textarea style = "text-transform:uppercase;" type="text" name="comentario" placeholder="Incluir comentário" required></textarea>
             <button class="btn btn-modal">Cadastrar</button>
           </form>
         </div>
@@ -41,12 +41,12 @@
     <!-- Edit Modal -->
     <div class="edit-modal modal-wrapper">
       <div class="modal">
-        <div class="modal-header"><h3 style = "text-transform:uppercase;">Editar Usuário</h3></div>
+        <div class="modal-header"><h3 style = "text-transform:uppercase;">Editar Comentário</h3></div>
         <div class="modal-body">
           <form class="form" autocomplete="off">
-            <input style = "text-transform:uppercase;" type="text" name="firstName" placeholder="Nome">
-            <input style = "text-transform:uppercase;" type="text" name="phone" placeholder="Telefone" id="Telefone">
-            <input style = "text-transform:lowercase;" type="email" name="email" placeholder="Email">
+            <input                                        type="text" name="horario"    id="currentDate" readonly>
+            <input    style = "text-transform:uppercase;" type="text" name="nome" placeholder="Alterar Nome" autofocus required>
+             <textarea style = "text-transform:uppercase;" type="text" name="comentario" placeholder="Alterar comentário" required></textarea>
             <button class="btn btn-modal">Alterar</button>
           </form>
         </div>
@@ -76,11 +76,8 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
-  
+      
   </script>
-
-
-
 
   <script src="./script.js"></script>
 </body>

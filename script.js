@@ -95,7 +95,7 @@ window.addEventListener('click', e => {
 // });
 
 // Real time listener
-db.collection('comments').onSnapshot(snapshot => {
+db.collection('comments').orderBy("horario",'desc').onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
     if(change.type === 'added') {
       renderUser(change.doc);

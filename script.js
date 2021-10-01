@@ -27,7 +27,7 @@ function timeStamp() {
   var mseg    = data.getMilliseconds();   // 0-999
   var tz      = data.getTimezoneOffset(); // em minutos
   var str_data = dia + '/' + (mes+1) + '/' + ano4;
-  var str_hora = hora + ':' + min;
+  var str_hora = hora + ':' + min + ':' + seg;
   var data_hora = str_hora + ', ' + str_data;
   return(data_hora);
 }
@@ -77,7 +77,7 @@ btnAdd.addEventListener('click', () => {
   addModal.classList.add('modal-show');
 
   addModalForm.nome.value = '';
-  addModalForm.horario.value = data_hora;
+  addModalForm.horario.value = timeStamp(); 
   addModalForm.comentario.value = '';
   });
 
@@ -123,7 +123,7 @@ addModalForm.addEventListener('submit', e => {
   e.preventDefault();
   db.collection('comments').add({
     Nome: addModalForm.nome.value,
-    Data: addModalForm.horario.value,
+    Data: timeStamp(),
     Comentario: addModalForm.comentario.value,
   });
   modalWrapper.classList.remove('modal-show');
@@ -134,7 +134,7 @@ editModalForm.addEventListener('submit', e => {
   e.preventDefault();
   db.collection('comments').doc(id).update({
     Nome: editModalForm.nome.value,
-    Data: editModalForm.horario.value,
+    Data: timeStamp(),
     Comentario: editModalForm.comentario.value,
   });
   editModal.classList.remove('modal-show');

@@ -42,7 +42,7 @@ const renderUser = doc => {
   </tr>
   `;
  
-  tableUsers.insertAdjacentHTML('beforeend', tr);
+  tableUsers.insertAdjacentHTML('afterbegin', tr);
 
   // Click edit user
   const btnEdit = document.querySelector(`[data-id='${doc.id}'] .btn-edit`);
@@ -95,7 +95,7 @@ window.addEventListener('click', e => {
 // });
 
 // Real time listener
-db.collection('comments').orderBy("horario",'desc').onSnapshot(snapshot => {
+db.collection('comments').onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
     if(change.type === 'added') {
       renderUser(change.doc);

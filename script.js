@@ -32,9 +32,9 @@ var data_hora = str_data + ' - ' + str_hora;
 const renderUser = doc => {
   const tr = `    
   <tr data-id='${doc.id}'>
-  <td style = "text-transform:uppercase;">${doc.data().nome}</td>     
-  <td style = "text-transform:uppercase;">${doc.data().horario}</td>
-  <td style = "text-transform:uppercase;">${doc.data().comentario}</td>
+  <td style = "text-transform:uppercase;">${doc.data().Nome}</td>     
+  <td style = "text-transform:uppercase;">${doc.data().Data}</td>
+  <td style = "text-transform:uppercase;">${doc.data().Comentario}</td>
   <td>
     <button class="btn btn-edit">Editar</button>
     <button class="btn btn-delete">Apagar</button>
@@ -50,9 +50,9 @@ const renderUser = doc => {
     editModal.classList.add('modal-show');
 
     id = doc.id;
-    editModalForm.nome.value = doc.data().nome;
-    editModalForm.horario.value = doc.data().horario;
-    editModalForm.comentario.value = doc.data().comentario;
+    editModalForm.nome.value = doc.data().Nome;
+    editModalForm.horario.value = doc.data().Data;
+    editModalForm.comentario.value = doc.data().Comentario;
 
   });
 

@@ -13,20 +13,24 @@ const tableUsers = document.querySelector('.table-users');
 
 let id;
 
-var data = new Date();
-var dia     = data.getDate();           // 1-31
-var dia_sem = data.getDay();            // 0-6 (zero=domingo)
-var mes     = data.getMonth();          // 0-11 (zero=janeiro)
-var ano2    = data.getYear();           // 2 dígitos
-var ano4    = data.getFullYear();       // 4 dígitos
-var hora    = data.getHours();          // 0-23
-var min     = data.getMinutes();        // 0-59
-var seg     = data.getSeconds();        // 0-59
-var mseg    = data.getMilliseconds();   // 0-999
-var tz      = data.getTimezoneOffset(); // em minutos
-var str_data = dia + '/' + (mes+1) + '/' + ano4;
-var str_hora = hora + ':' + min + ':' + seg;
-var data_hora = str_data + ' - ' + str_hora;
+/// DATA FORMATADA
+function timeStamp() {
+  var data = new Date();
+  var dia     = data.getDate();           // 1-31
+  var dia_sem = data.getDay();            // 0-6 (zero=domingo)
+  var mes     = data.getMonth();          // 0-11 (zero=janeiro)
+  var ano2    = data.getYear();           // 2 dígitos
+  var ano4    = data.getFullYear();       // 4 dígitos
+  var hora    = data.getHours();          // 0-23
+  var min     = data.getMinutes();        // 0-59
+  var seg     = data.getSeconds();        // 0-59
+  var mseg    = data.getMilliseconds();   // 0-999
+  var tz      = data.getTimezoneOffset(); // em minutos
+  var str_data = dia + '/' + (mes+1) + '/' + ano4;
+  var str_hora = hora + ':' + min;
+  var data_hora = str_hora + ', ' + str_data;
+  return(data_hora);
+}
 
 // Create element and render comments
 const renderUser = doc => {
@@ -95,7 +99,7 @@ window.addEventListener('click', e => {
 // });
 
 // Real time listener
-db.collection('comments').onSnapshot(snapshot => {
+db.collection('comments').orderBy("Data", "asc").onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
     if(change.type === 'added') {
       renderUser(change.doc);

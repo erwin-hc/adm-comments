@@ -74,7 +74,7 @@ btnAdd.addEventListener('click', () => {
 
   addModalForm.nome.value = '';
   addModalForm.horario.value = data_hora;
-  addModalForm.comentario.value.replace(/\r?\n/g, "<br />") = '';
+  addModalForm.comentario.value = '';
   });
 
 // User click anyware outside the modal

@@ -118,9 +118,9 @@ db.collection('comments').orderBy("horario",'desc').onSnapshot(snapshot => {
 addModalForm.addEventListener('submit', e => {
   e.preventDefault();
   db.collection('comments').add({
-    nome: addModalForm.nome.value,
-    horario: addModalForm.horario.value,
-    comentario: addModalForm.comentario.value,
+    Nome: addModalForm.nome.value,
+    Data: addModalForm.horario.value,
+    Comentario: addModalForm.comentario.value,
   });
   modalWrapper.classList.remove('modal-show');
 });
@@ -129,9 +129,9 @@ addModalForm.addEventListener('submit', e => {
 editModalForm.addEventListener('submit', e => {
   e.preventDefault();
   db.collection('comments').doc(id).update({
-    nome: editModalForm.nome.value,
-    horario: editModalForm.horario.value,
-    comentario: editModalForm.comentario.value,
+    Nome: editModalForm.nome.value,
+    Data: editModalForm.horario.value,
+    Comentario: editModalForm.comentario.value,
   });
   editModal.classList.remove('modal-show');
   
